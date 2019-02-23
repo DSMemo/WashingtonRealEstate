@@ -40,6 +40,11 @@ def get_zip():
 				cell_list.append(text)
 			row_list.append(cell_list)
 
+# Gets rid of the view map column
+	for i in range(len(row_list)):
+		del row_list[i][3]
+
+
 	for item in row_list:
 		writer.writerow(item)
 
