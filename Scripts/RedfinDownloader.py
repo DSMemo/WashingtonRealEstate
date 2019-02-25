@@ -5,7 +5,7 @@ from contextlib import closing
 from bs4 import BeautifulSoup
 from time import sleep
 from random import randint
-
+import os
 
 def get_url(url):
 	# Need to provide user agent or Redfin is unhappy
@@ -22,7 +22,7 @@ def get_url(url):
 
 def get_zip_list():
 	# Grabs the zip codes from the csv and turn them into a list
-	zip_codes = pd.read_csv('./zip.csv', usecols=['Zip Code'], skiprows=[732])
+	zip_codes = pd.read_csv(os.getcwd()+'/DATA/zip.csv', usecols=['Zip Code'], skiprows=[732])
 	zip_codes = zip_codes.ix[:, 0].tolist()
 	return zip_codes
 
@@ -52,10 +52,10 @@ def downloader():
 			# This puts all the csvs into one file. It creates the file for the first loop and then appends
 			# The header row is 383 characters long so I trim that when appending.
 			if i == 0:
-				with open('RedfinRealEstateData.csv', 'wb') as f:
+				with open(os.getcwd()+'/DATA/RedfinRealEstateData.csv', 'wb') as f:
 					f.write(r.content)
 			else:
-				with open('RedfinRealEstateData.csv', 'ab') as f:
+				with open(os.getcwd()+'/DATA/RedfinRealEstateData.csv', 'ab') as f:
 					f.write(r.content[383:])
 
 			# Sleeps to not be mean to Redfin, sleeps a long time because extra nice, random so it doesn't seem like a robot

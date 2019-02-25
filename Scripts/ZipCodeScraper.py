@@ -3,7 +3,7 @@ from requests.exceptions import RequestException
 from contextlib import closing
 from bs4 import BeautifulSoup
 import csv
-
+import os
 
 def get_url(url):
 	try:
@@ -14,7 +14,7 @@ def get_url(url):
 
 
 def get_zip():
-	outfile = open('zip.csv', 'w', newline='')
+	outfile = open(os.getcwd()+'/DATA/zip.csv', 'w', newline='')
 	writer = csv.writer(outfile)
 
 	url = 'https://www.zipcodestogo.com/Washington/'
